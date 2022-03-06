@@ -1,19 +1,23 @@
 {
-  "name": "peach-store",
-  "version": "1.0.0",
-  "description": "digital factory peach store coding challeng",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "salim dellali",
-  "license": "ISC",
-  "dependencies": {
-    "bcryptjs": "^2.4.3",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.0",
-    "express": "^4.17.3",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.2.4"
-  }
+	"name": "peach-store",
+	"version": "1.0.0",
+	"description": "digital factory peach store coding challeng",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"server": "nodemon server.js"
+	},
+	"author": "salim dellali",
+	"license": "ISC",
+	"dependencies": {
+		"bcryptjs": "^2.4.3",
+		"cors": "^2.8.5",
+		"dotenv": "^16.0.0",
+		"express": "^4.17.3",
+		"jsonwebtoken": "^8.5.1",
+		"mongoose": "^6.2.4"
+	},
+	"devDependencies": {
+		"nodemon": "^2.0.15"
+	}
 }
