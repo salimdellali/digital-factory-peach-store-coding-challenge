@@ -15,6 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // import routes and use routes as middlewares
 app.use('/api/signup', require('./routes/api/signup'));
+app.use('/api/login', require('./routes/api/login'));
 
 // test if / route works
 app.get('/', (req, res) => {
