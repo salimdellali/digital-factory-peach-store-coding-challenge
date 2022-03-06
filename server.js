@@ -3,6 +3,8 @@ const cors = require('cors');
 require('dotenv/config');
 require('./database');
 
+const auth = require('./middlewares/auth');
+
 // Init app
 const app = express();
 
@@ -18,7 +20,7 @@ app.use('/api/signup', require('./routes/api/signup'));
 app.use('/api/login', require('./routes/api/login'));
 
 // test if / route works
-app.get('/', (req, res) => {
+app.get('/', auth, (req, res) => {
 	res.send('we are on root');
 });
 
