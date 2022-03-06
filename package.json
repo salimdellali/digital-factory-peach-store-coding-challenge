@@ -2,7 +2,7 @@
 	"name": "peach-store",
 	"version": "1.0.0",
 	"description": "digital factory peach store coding challeng",
-	"main": "index.js",
+	"main": "server.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"server": "nodemon server.js"
