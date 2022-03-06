@@ -1,4 +1,3 @@
-// import npm packages
 const express = require('express');
 const cors = require('cors');
 require('dotenv/config');
@@ -13,6 +12,9 @@ app.use(cors());
 // to be able to parse json data and urlencoded data
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// import routes and use routes as middlewares
+app.use('/api/signup', require('./routes/api/signup'));
 
 // test if / route works
 app.get('/', (req, res) => {
