@@ -29,13 +29,13 @@ router.post('/', (req, res) => {
 	}).then((user) => {
 		if (!user)
 			return res.status(400).json({
-				msg: "Utilisateur avec un tel username ou adresse email n'existe pas",
+				error: "Utilisateur avec un tel username ou adresse email n'existe pas",
 			});
 
 		// Validate password
 		bcrypt.compare(password, user.password).then((isMatch) => {
 			if (!isMatch)
-				return res.status(400).json({ msg: 'Identifiants incorrectes' });
+				return res.status(400).json({ error: 'Identifiants incorrectes' });
 
 			// credentials are valid, update lastAccess and return the JWT Token with needed info
 			const newAccessDate = Date.now();

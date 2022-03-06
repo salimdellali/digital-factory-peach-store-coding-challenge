@@ -39,7 +39,7 @@ router.post('/', (req, res) => {
 			if (user)
 				return res.status(301).json({
 					msg: 'Utilisateur déjà existant avec un tel numéro de téléphone ou adresse email',
-					loginUrl: req.protocol + '://' + req.get('host') + '/api/login',
+					redirect: req.protocol + '://' + req.get('host') + '/api/login',
 				});
 
 			// user does not exist, create new
