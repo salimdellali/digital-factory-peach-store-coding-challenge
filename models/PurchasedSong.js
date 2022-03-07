@@ -9,7 +9,7 @@ const PurchasedSongsSchema = mongoose.Schema(
 		},
 		idSong: {
 			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Story',
+			ref: 'Song',
 			required: true,
 		},
 		purchaseDate: {

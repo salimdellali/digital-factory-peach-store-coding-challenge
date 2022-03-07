@@ -7,7 +7,7 @@ const PurchasedSong = require('../../models/PurchasedSong');
 const Song = require('../../models/Song');
 
 /**
- * @route	POST api/purchase/song
+ * @route	POST api/purchase-song
  * @desc	Add a new Song Product
  * @access	Private
  */
