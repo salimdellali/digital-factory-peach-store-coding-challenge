@@ -9,32 +9,31 @@ const PurchasedSong = require('../../models/PurchasedSong');
  * @desc	get all purchased songs orders details for the current logged user
  * @access	Private
  */
-router.get('/', auth, (req, res) => {
+router.get('/', auth, async (req, res) => {
 	const idUser = req.user.id;
+	try {
+		const purchasedSongs = await PurchasedSong.find({ idUser }).populate(
+			'idSong'
+		);
 
-	PurchasedSong.find({ idUser })
-		.populate('idSong')
-		.then((purchasedSongs) => {
-			let totalPrice = 0;
+		let totalPrice = 0;
+		const purchases = purchasedSongs.map((purchasedSong) => {
+			totalPrice += purchasedSong.idSong.price;
 
-			const purchases = purchasedSongs.map((purchasedSong) => {
-				totalPrice += purchasedSong.idSong.price;
-
-				return {
-					idPurchase: purchasedSong.id,
-					purchaseDate: purchasedSong.purchaseDate,
-					songDetails: purchasedSong.idSong,
-				};
-			});
-
-			res.json({
-				totalPrice,
-				purchases,
-			});
-		})
-		.catch((err) => {
-			res.status(500).json({ error: 'Something went wrong! ' + err });
+			return {
+				idPurchase: purchasedSong.id,
+				purchaseDate: purchasedSong.purchaseDate,
+				songDetails: purchasedSong.idSong,
+			};
 		});
+
+		res.json({
+			totalPrice,
+			purchases,
+		});
+	} catch (e) {
+		res.status(500).json({ error: 'Something went wrong! ' + e });
+	}
 });
 
 module.exports = router;

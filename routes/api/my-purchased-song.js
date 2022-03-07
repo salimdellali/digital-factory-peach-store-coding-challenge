@@ -9,41 +9,41 @@ const PurchasedSong = require('../../models/PurchasedSong');
  * @desc	get my purchased song order details for the current logged user
  * @access	Private
  */
-router.get('/', auth, (req, res) => {
+router.get('/', auth, async (req, res) => {
 	const idUser = req.user.id;
 	const { idPurchase } = req.body;
 
-	PurchasedSong.findOne({ id: idPurchase, idUser })
-		.populate('idSong')
-		.then((purchasedSong) => {
-			// NOTE : here it's a single purchased song
-			// check if the user did this purchase
-			if (!purchasedSong) 
-				return res.status(400).json({ error: "Cette achat n'a pas été fait" });
+	try {
+		const purchasedSong = await PurchasedSong.findOne({
+			id: idPurchase,
+			idUser,
+		}).populate('idSong'); // NOTE : here it's a single purchased song
 
-			// purchase found, return purchase details and priceTotal
-			PurchasedSong.find({ idUser })
-				.populate('idSong')
-				.then((purchasedSongs) => {
-					// NOTE : here it's all purchased songs (see the 's' at the end of the variable name)
-					const totalPrice = purchasedSongs.reduce(
-						(acc, curr) => curr.idSong.price,
-						0
-					);
+		// check if the user did this purchase
+		if (!purchasedSong)
+			return res.status(400).json({ error: "Cette achat n'a pas été fait" });
 
-					res.json({
-						totalPrice,
-						purchasedSong: {
-							idPurchase: purchasedSong.id,
-							purchaseDate: purchasedSong.purchaseDate,
-							songDetails: purchasedSong.idSong,
-						},
-					});
-				});
-		})
-		.catch((err) => {
-			res.status(500).json({ error: 'Something went wrong! ' + err });
+		// purchase found, return purchase details and priceTotal
+		const purchasedSongs = await PurchasedSong.find({ idUser }).populate(
+			'idSong'
+		); // NOTE : here it's all purchased songs (see the 's' at the end of the variable name)
+
+		const totalPrice = purchasedSongs.reduce(
+			(acc, curr) => curr.idSong.price,
+			0
+		);
+
+		res.json({
+			totalPrice,
+			purchasedSong: {
+				idPurchase: purchasedSong.id,
+				purchaseDate: purchasedSong.purchaseDate,
+				songDetails: purchasedSong.idSong,
+			},
 		});
+	} catch (e) {
+		res.status(500).json({ error: 'Something went wrong! ' + e });
+	}
 });
 
 module.exports = router;

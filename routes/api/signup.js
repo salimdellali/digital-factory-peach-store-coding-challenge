@@ -14,7 +14,7 @@ const User = require('../../models/User');
  * @desc signup and receive a JWT Token Authorization
  * @access Public
  */
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
 	const { firstName, lastName, phoneNumber, username, email, password } =
 		req.body;
 
@@ -41,51 +41,48 @@ router.post('/', (req, res) => {
 	}
 
 	// Check for existing user
-	User.findOne({ $or: [{ phoneNumber: phoneNumber }, { email: email }] }).then(
-		(user) => {
-			if (user)
-				return res.status(301).json({
-					msg: 'Utilisateur déjà existant avec un tel numéro de téléphone ou adresse email',
-					redirect: req.protocol + '://' + req.get('host') + '/api/login',
-				});
+	try {
+		const user = await User.findOne({
+			$or: [{ phoneNumber: phoneNumber }, { email: email }],
+		});
 
-			// user does not exist, create new
-			const newUser = new User({
-				firstName,
-				lastName,
-				phoneNumber,
-				username,
-				email,
-				password,
+		if (user)
+			return res.status(301).json({
+				msg: 'Utilisateur déjà existant avec un tel numéro de téléphone ou adresse email',
+				redirect: req.protocol + '://' + req.get('host') + '/api/login',
 			});
 
-			// Creater salt & hash
-			bcrypt.genSalt(10, (err, salt) => {
-				bcrypt.hash(newUser.password, salt, (err, hash) => {
-					if (err) throw err;
-					newUser.password = hash;
-					newUser.save().then((user) => {
-						jwt.sign(
-							{ id: user.id }, // the payload, first parameter of sign() method, can be anything
-							process.env.jwtSecret, // the secret, second parameter
-							{ expiresIn: 3600 }, // Optional, expires ( here 3600 = 1 hours), 3rd argument
-							(err, token) => {
-								// because it's asynchronous, callback function
-								if (err) throw err;
-								res.json({
-									token,
-									user: {
-										id: user.id,
-										lastAccess: user.lastAccess,
-									},
-								});
-							}
-						);
-					});
-				});
-			});
-		}
-	);
+		// user does not exist, create new
+		const newUser = new User({
+			firstName,
+			lastName,
+			phoneNumber,
+			username,
+			email,
+			password,
+		});
+
+		const salt = await bcrypt.genSalt(10);
+		const hash = await bcrypt.hash(newUser.password, salt);
+		newUser.password = hash;
+		const newSavedUser = await newUser.save();
+
+		const token = await jwt.sign(
+			{ id: newSavedUser.id }, // the payload, first parameter of sign() method, can be anything
+			process.env.jwtSecret, // the secret, second parameter
+			{ expiresIn: 3600 } // Optional, expires ( here 3600 = 1 hours), 3rd argument
+		);
+
+		res.json({
+			token,
+			user: {
+				id: newSavedUser.id,
+				lastAccess: newSavedUser.lastAccess,
+			},
+		});
+	} catch (e) {
+		res.status(500).json({ error: 'Something went wrong! ' + e });
+	}
 });
 
 module.exports = router;
