@@ -1,8 +1,6 @@
-// import npm packages
 const express = require('express');
 const router = express.Router();
 
-// Song Model
 const Song = require('../../models/Song');
 
 /**
@@ -17,7 +15,7 @@ router.get('/', (req, res) => {
 			res.json(songs);
 		})
 		.catch((err) => {
-			res.json({ error: 'Something went wrong! ' + err });
+			res.status(500).json({ error: 'Something went wrong! ' + err });
 		});
 });
 
@@ -33,7 +31,7 @@ router.post('/', (req, res) => {
 		.then((song) => res.json(song))
 		.catch((err) => {
 			// Server Error
-			res.json({ error: 'Something went wrong! ' + err });
+			res.status(500).json({ error: 'Something went wrong! ' + err });
 		});
 });
 

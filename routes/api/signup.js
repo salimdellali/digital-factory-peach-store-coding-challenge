@@ -3,7 +3,6 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-// User Model
 const User = require('../../models/User');
 
 /**
@@ -29,8 +28,8 @@ router.post('/', (req, res) => {
 			.json({ error: 'Veillez remplire tout les champs SVP' });
 	}
 
-	// TODO verify input email syntax
-	// TODO verify input phone number syntax
+	// @TODO verify input email syntax
+	// @TODO verify input phone number syntax
 
 	// Check for existing user
 	User.findOne({ $or: [{ phoneNumber: phoneNumber }, { email: email }] }).then(

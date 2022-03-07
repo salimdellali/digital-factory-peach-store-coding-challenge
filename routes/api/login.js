@@ -1,10 +1,8 @@
-// import npm packages
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-// User Model
 const User = require('../../models/User');
 
 /**
@@ -63,16 +61,5 @@ router.post('/', (req, res) => {
 		});
 	});
 });
-
-// /**
-//  * @route	GET api/auth/user
-//  * @desc	Get user data
-//  * @access	PRIVATE
-//  */
-// router.get('/user', auth, (req, res) => {
-// 	User.findById(req.user.id)
-// 		.select('-password')
-// 		.then((user) => res.json(user));
-// });
 
 module.exports = router;

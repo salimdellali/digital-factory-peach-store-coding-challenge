@@ -54,7 +54,7 @@ router.post('/', auth, (req, res) => {
 			});
 		})
 		.catch((err) => {
-			res.json({ error: 'Something went wrong! ' + err });
+			res.status(500).json({ error: 'Something went wrong! ' + err });
 		});
 });
 
