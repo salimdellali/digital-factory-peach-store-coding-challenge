@@ -2,6 +2,10 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const {
+	isAtLeastOneValueEmpty,
+	isEmailValid,
+} = require('../../helpers/utilities');
 
 const User = require('../../models/User');
 
@@ -16,20 +20,25 @@ router.post('/', (req, res) => {
 
 	// Simple validation
 	if (
-		!firstName ||
-		!lastName ||
-		!phoneNumber ||
-		!username ||
-		!email ||
-		!password
+		isAtLeastOneValueEmpty([
+			firstName,
+			lastName,
+			phoneNumber,
+			username,
+			email,
+			password,
+		])
 	) {
 		return res
 			.status(400)
 			.json({ error: 'Veillez remplire tout les champs SVP' });
 	}
 
-	// @TODO verify input email syntax
-	// @TODO verify input phone number syntax
+	if (!isEmailValid(email)) {
+		return res
+			.status(400)
+			.json({ error: "L'adresse email fournie est invalide" });
+	}
 
 	// Check for existing user
 	User.findOne({ $or: [{ phoneNumber: phoneNumber }, { email: email }] }).then(

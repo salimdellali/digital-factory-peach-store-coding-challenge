@@ -1,5 +1,4 @@
 const ObjectId = require('mongoose').Types.ObjectId;
-
 const isValidObjectId = (id) => {
 	if (ObjectId.isValid(id)) {
 		if (String(new ObjectId(id)) === id) return true;
@@ -8,4 +7,21 @@ const isValidObjectId = (id) => {
 	return false;
 };
 
-module.exports = isValidObjectId;
+//
+
+const isEmptyOrUndefined = (value) => !value || value.trim() === '';
+const isAtLeastOneValueEmpty = (arrayOfValues) =>
+	arrayOfValues.some(isEmptyOrUndefined);
+
+//
+
+const isEmailValid = (email) => {
+	const emailRegEx = /\S+@\S+\.\S+/;
+	return emailRegEx.test(String(email).toLowerCase());
+};
+
+module.exports = {
+	isValidObjectId,
+	isAtLeastOneValueEmpty,
+	isEmailValid,
+};
