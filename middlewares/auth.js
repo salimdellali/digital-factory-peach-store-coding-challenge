@@ -5,7 +5,7 @@ const auth = (req, res, next) => {
 
 	// Check for token
 	if (!token) {
-		return res.status(401).json({ error: 'No token, authorization denied' });
+		return res.status(401).json({ error: 'Pas de Token, permission refusée' });
 	}
 
 	try {
@@ -17,7 +17,7 @@ const auth = (req, res, next) => {
 
 		next();
 	} catch (e) {
-		res.status(400).json({ error: 'Token not valid' });
+		res.status(400).json({ error: 'Token invalide' });
 	}
 };
 
