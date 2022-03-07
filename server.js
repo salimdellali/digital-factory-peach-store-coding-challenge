@@ -3,8 +3,6 @@ const cors = require('cors');
 require('dotenv/config');
 require('./database');
 
-const auth = require('./middlewares/auth');
-
 // Init app
 const app = express();
 

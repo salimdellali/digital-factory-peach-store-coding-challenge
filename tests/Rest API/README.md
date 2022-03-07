@@ -1,0 +1,2 @@
+- import `Digital Factory Coding Challenge.postman_collection.json` file into your Postman Client, in order to get an Idea on how to perform the request (which endpoints to hit and what should the request body look like for each route)
+- This file can be used to test Rest API endpoint, but first this server should be deployed 

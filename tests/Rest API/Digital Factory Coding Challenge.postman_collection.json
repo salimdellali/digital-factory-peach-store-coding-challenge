@@ -1,0 +1,244 @@
+{
+	"info": {
+		"_postman_id": "41225567-5c7b-4589-9098-7b79cad8b8e6",
+		"name": "Digital Factory Coding Challenge",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/api/songs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:1234/api/songs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"api",
+						"songs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/songs",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"She Likes\",\r\n    \"artist\": \"Prznt\",\r\n    \"price\": 16\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1234/api/songs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"api",
+						"songs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/signup",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"salim3\",\r\n    \"lastName\": \"dellali3\",\r\n    \"phoneNumber\": \"06570616103\",\r\n    \"username\": \"desa3\",\r\n    \"email\": \"dellali.salim@gmail3.com\",\r\n    \"password\" : \"digitalfactory3\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1234/api/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"api",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userNameOrEmail\": \"dellali.salim@gmail.com\",\r\n    \"password\": \"digitalfactory\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1234/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/login 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userNameOrEmail\": \"dellali.salim@gmail2.com\",\r\n    \"password\": \"digitalfactory2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1234/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/purchase-song",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjRjZDQ1MjVkNTgxY2NmMWY1ZTkwMiIsImlhdCI6MTY0NjY2MTQ3MiwiZXhwIjoxNjQ2NjY1MDcyfQ.P9otPGCyUyv_vtqQ1eSvh_UitLPNKI7VPWsW_T906GI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idSong\": \"6224f2d6967f08bdb2c92267\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1234/api/purchase-song",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"api",
+						"purchase-song"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/my-purchased-songs",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjRjZDQ1MjVkNTgxY2NmMWY1ZTkwMiIsImlhdCI6MTY0NjY2MTQ3MiwiZXhwIjoxNjQ2NjY1MDcyfQ.P9otPGCyUyv_vtqQ1eSvh_UitLPNKI7VPWsW_T906GI",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:1234/api/my-purchased-songs",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"api",
+						"my-purchased-songs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "/api/my-purchased-song",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMjRjZDQ1MjVkNTgxY2NmMWY1ZTkwMiIsImlhdCI6MTY0NjY2MTQ3MiwiZXhwIjoxNjQ2NjY1MDcyfQ.P9otPGCyUyv_vtqQ1eSvh_UitLPNKI7VPWsW_T906GI",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idPurchase\": \"6225e31e9e9fb28b21acdc19\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:1234/api/my-purchased-song",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "1234",
+					"path": [
+						"api",
+						"my-purchased-song"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
