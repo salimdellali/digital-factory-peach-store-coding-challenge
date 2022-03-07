@@ -5,8 +5,8 @@ const auth = require('../../middlewares/auth');
 const PurchasedSong = require('../../models/PurchasedSong');
 
 /**
- * @route	GET api/my-songs
- * @desc	get all purchased songs for the current logged user
+ * @route	GET api/my-purchased-songs
+ * @desc	get all purchased songs orders details for the current logged user
  * @access	Private
  */
 router.get('/', auth, (req, res) => {
@@ -16,20 +16,17 @@ router.get('/', auth, (req, res) => {
 		.populate('idSong')
 		.then((purchasedSongs) => {
 			let totalPrice = 0;
-			let purchases = [];
 
-			purchasedSongs.forEach((purchasedSong) => {
-				const { id, purchaseDate, idSong } = purchasedSong;
-				const purchasedSongDetails = idSong;
-				const { price } = purchasedSongDetails;
-				totalPrice += price;
-				const purchase = {
-					idPurchase: id,
-					purchaseDate,
-					purchasedSongDetails,
+			const purchases = purchasedSongs.map((purchasedSong) => {
+				totalPrice += purchasedSong.idSong.price;
+
+				return {
+					idPurchase: purchasedSong.id,
+					purchaseDate: purchasedSong.purchaseDate,
+					songDetails: purchasedSong.idSong,
 				};
-				purchases.push(purchase);
 			});
+
 			res.json({
 				totalPrice,
 				purchases,

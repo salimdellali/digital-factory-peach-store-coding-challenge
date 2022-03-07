@@ -20,7 +20,7 @@ app.use('/api/songs', require('./routes/api/songs'));
 app.use('/api/signup', require('./routes/api/signup'));
 app.use('/api/login', require('./routes/api/login'));
 app.use('/api/purchase-song', require('./routes/api/purchase-song'));
-app.use('/api/my-songs', require('./routes/api/my-songs'));
+app.use('/api/my-purchased-songs', require('./routes/api/my-purchased-songs'));
 
 // test if / route works
 app.get('/', auth, (req, res) => {
