@@ -8,6 +8,4 @@ const isValidObjectId = (id) => {
 	return false;
 };
 
-module.exports = {
-	isValidObjectId: isValidObjectId,
-};
+module.exports = isValidObjectId;

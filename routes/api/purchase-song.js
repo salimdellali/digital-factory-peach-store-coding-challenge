@@ -1,28 +1,10 @@
-// import npm packages
 const express = require('express');
 const router = express.Router();
 const auth = require('../../middlewares/auth');
-const { isValidObjectId } = require('../../helpers/utilities');
+const isValidObjectId = require('../../helpers/utilities');
 
-// Song Model
 const PurchasedSong = require('../../models/PurchasedSong');
 const Song = require('../../models/Song');
-
-// /**
-//  * @route	GET api/songs
-//  * @desc	Get all the available songs to purchase
-//  * @access	Public
-//  */
-// router.get('/', (req, res) => {
-// 	Song.find()
-// 		.exec()
-// 		.then((songs) => {
-// 			res.json(songs);
-// 		})
-// 		.catch((err) => {
-// 			res.json({ error: 'Something went wrong! ' + err });
-// 		});
-// });
 
 /**
  * @route	POST api/purchase/song
@@ -32,7 +14,6 @@ const Song = require('../../models/Song');
 router.post('/', auth, (req, res) => {
 	const { idSong } = req.body;
 	const idUser = req.user.id;
-	// const idUser =
 
 	// check if the song id is a valid Object Id
 	if (!isValidObjectId(idSong)) {
@@ -56,7 +37,7 @@ router.post('/', auth, (req, res) => {
 			// check if the song hasn't been purchased
 			PurchasedSong.findOne({ idSong, idUser }).then((purchasedSong) => {
 				if (purchasedSong) {
-					res.status(400).json({ error: 'La chanson a été déjà acheté' });
+					res.status(400).json({ error: 'La chanson a été déjà achetée' });
 					return;
 				}
 
