@@ -18,10 +18,8 @@ router.get('/', auth, (req, res) => {
 		.then((purchasedSong) => {
 			// NOTE : here it's a single purchased song
 			// check if the user did this purchase
-			if (!purchasedSong) {
-				res.status(400).json({ error: "Cette achat n'a pas été fait" });
-				return;
-			}
+			if (!purchasedSong) 
+				return res.status(400).json({ error: "Cette achat n'a pas été fait" });
 
 			// purchase found, return purchase details and priceTotal
 			PurchasedSong.find({ idUser })
