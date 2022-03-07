@@ -16,8 +16,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // import routes and use routes as middlewares
+app.use('/api/songs', require('./routes/api/songs'));
 app.use('/api/signup', require('./routes/api/signup'));
 app.use('/api/login', require('./routes/api/login'));
+app.use('/api/purchase-song', require('./routes/api/purchase-song'));
 
 // test if / route works
 app.get('/', auth, (req, res) => {
